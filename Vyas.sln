@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VyasApi", "VyasApi\VyasApi.csproj", "{3FC86F92-DF29-47C4-A192-3B132EB2A301}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VyasApi.Data", "VyasApi.Data\VyasApi.Data.csproj", "{1ADF1AE8-D75A-4B77-B6B7-A26B5D3B7B4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FC86F92-DF29-47C4-A192-3B132EB2A301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FC86F92-DF29-47C4-A192-3B132EB2A301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FC86F92-DF29-47C4-A192-3B132EB2A301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FC86F92-DF29-47C4-A192-3B132EB2A301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ADF1AE8-D75A-4B77-B6B7-A26B5D3B7B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ADF1AE8-D75A-4B77-B6B7-A26B5D3B7B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ADF1AE8-D75A-4B77-B6B7-A26B5D3B7B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ADF1AE8-D75A-4B77-B6B7-A26B5D3B7B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
