@@ -11,6 +11,8 @@ public interface IUserService
 	Task<ResponseDto<UserDto>> GenerateActivationCode(GenerateActivationCodeDto userDto);
 	Task<ResponseDto<UserDto>> AuthenticateUser(AuthenticateUserDto userDto);
 	Task<ResponseDto<UserDto>> GetUserByEmail(UserDto userDto);
+	Task<ResponseDto<UserDto>> GetUserByEmail(string email);
+	Task<ResponseDto<UserDto>> UpdateUser(UserDto userDto);
 	Task<ResponseDto<bool>> DeleteUser(string userEmail);
 	Task<ResponseDto<UserDto>> GetUserPassword(UserDto userDto);
 }

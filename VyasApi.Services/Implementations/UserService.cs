@@ -52,7 +52,11 @@ public class UserService : IUserService
 	}
 	public async Task<ResponseDto<UserDto>> GetUserByEmail(UserDto userDto)
 	{
-		var user = await userRepository.GetUserByEmail(userDto.Email);
+		return await GetUserByEmail(userDto.Email);
+	}
+	public async Task<ResponseDto<UserDto>> GetUserByEmail(string email)
+	{
+		var user = await userRepository.GetUserByEmail(email);
 		if (user != null)
 		{
 			return new ResponseDto<UserDto>() {
@@ -111,8 +115,6 @@ public class UserService : IUserService
 			};
 		}
 		return null;
-
-
 	}
 	public async Task<ResponseDto<UserDto>> GenerateActivationCode(GenerateActivationCodeDto userDto)
 	{
@@ -181,7 +183,30 @@ public class UserService : IUserService
 		}
 		return new ResponseDto<UserDto> { Results = null };
 	}
-	
+	public async Task<ResponseDto<UserDto>> UpdateUser(UserDto userDto)
+	{
+		var userEntity = await userRepository.GetUserByEmail(userDto.Email);
+		if (userEntity != null)
+		{
+			userEntity.FullName = userDto.FullName;
+			userEntity.Token = passwordService.HashPassword(userDto.Password);
+		}
+		var updatedUserEntity = await userRepository.UpdateUser(userEntity);
+		if (updatedUserEntity != null)
+		{
+			return new ResponseDto<UserDto> {
+				Results = new UserDto {
+					Email = updatedUserEntity.Email,
+					Id = updatedUserEntity.Id,
+					FullName = updatedUserEntity.FullName,
+					CreatedDate = updatedUserEntity.CreatedDate,
+					LastLogin = updatedUserEntity.LastLogin,
+					IsActive = updatedUserEntity.IsActive
+				}
+			};
+		}
+		return null;
+	}
 	public async Task<ResponseDto<bool>> DeleteUser(string userEmail)
 	{
 		var userEntity = await userRepository.GetUserByEmail(userEmail);
@@ -192,6 +217,7 @@ public class UserService : IUserService
 		}
 		return new ResponseDto<bool> { Results = false };
 	}
+	
 
 	private static string GenerateActivationId()
 	{

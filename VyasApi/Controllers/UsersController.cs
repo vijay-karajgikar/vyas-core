@@ -135,71 +135,66 @@ namespace VyasApi.Controllers
 			}
 		}
 
+		[Route("email")]
+		[HttpGet]
+		public async Task<IActionResult> GetUser([FromQuery] string email)
+		{
+			try
+			{
+				var users = await userService.GetUserByEmail(email);
+				return Ok(users);				
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(StatusCodes.Status500InternalServerError, 
+					new ResponseDto<List<UserDto>> 
+					{
+						Errors = new List<ErrorDto>{
+							new ErrorDto 
+							{ ErrorCode = 1, ErrorMessage = ex.Message }
+						}
+					});
+			}
+		}
+		
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser([FromBody] UserDto user)
+        {
+            try
+			{
+				var updated = await userService.UpdateUser(user);
+				return Ok(updated);
+			}
+			catch (System.Exception ex)
+			{				
+				return StatusCode(StatusCodes.Status500InternalServerError,
+					new ResponseDto<UserDto>
+					{
+						Errors = new List<ErrorDto> {
+							new ErrorDto { ErrorCode = 1, ErrorMessage = ex.Message }
+						}
+					});
+			}
+        }
 
-		// [Route("{id}")]
-        // [HttpGet]
-        // public async Task<IActionResult> GetUser([FromQuery] int? userId)
-        // {
-        //     try
-		// 	{
-		// 		var user = await userService.GetUser(userId.Value);
-		// 		return Ok(user);
-		// 	}
-		// 	catch (Exception ex)
-		// 	{
-		// 		return StatusCode(StatusCodes.Status500InternalServerError, 
-		// 			new ResponseDto<List<UserDto>> 
-		// 			{
-		// 				Errors = new List<ErrorDto>{
-		// 					new ErrorDto 
-		// 					{ ErrorCode = 1, ErrorMessage = ex.Message }
-		// 				}
-		// 			});
-		// 	}
-        // }
-
-        // [HttpPut]
-        // public async Task<IActionResult> UpdateUser([FromBody] UserDto user)
-        // {
-        //     try
-		// 	{
-		// 		var updated = await userService.PutUser(user);
-		// 		return Ok(updated);
-		// 	}
-		// 	catch (System.Exception ex)
-		// 	{				
-		// 		return StatusCode(StatusCodes.Status500InternalServerError,
-		// 			new ResponseDto<UserDto>
-		// 			{
-		// 				Errors = new List<ErrorDto> {
-		// 					new ErrorDto { ErrorCode = 1, ErrorMessage = ex.Message }
-		// 				}
-		// 			});
-		// 	}
-        // }
-
-		// [Route("{id}")]
-        // [HttpDelete]
-        // public async Task<IActionResult> DeleteUser([FromQuery] int? userId)
-        // {
-        //     try
-		// 	{
-		// 		var deleted = await userService.DeleteUser(userId.Value);
-		// 		return Ok(deleted);
-		// 	}
-		// 	catch (System.Exception ex)
-		// 	{
-		// 		return StatusCode(StatusCodes.Status500InternalServerError,
-		// 			new ResponseDto<bool>
-		// 			{
-		// 				Errors = new List<ErrorDto> {
-		// 					new ErrorDto { ErrorCode = 1, ErrorMessage = ex.Message }
-		// 				}
-		// 			});
-		// 	}
-        // }
-    
-	
-	
+		[HttpDelete]
+		public async Task<IActionResult> DeleteUser([FromBody] UserDto user)
+		{
+			try
+			{
+				var deleteUserResult = await userService.DeleteUser(user.Email);
+				return Ok(deleteUserResult);
+			}
+			catch (Exception ex)
+			{				
+				return StatusCode(StatusCodes.Status500InternalServerError,
+					new ResponseDto<UserDto>
+					{
+						Errors = new List<ErrorDto> {
+							new ErrorDto { ErrorCode = 1, ErrorMessage = ex.Message }
+						}
+					});
+			}
+		}
 	}
 }
