@@ -139,7 +139,27 @@ public class UserService : IUserService
 	}
 	public async Task<ResponseDto<UserDto>> AuthenticateUser(AuthenticateUserDto userDto)
 	{
+		var userEntity = await userRepository.GetUserByEmail(userDto.Email);
+		if (userEntity != null)
+		{
+			userEntity.LastLogin = DateTime.Now;
+		}
+		var updatedUserEntity = await userRepository.UpdateUser(userEntity);
+		if (updatedUserEntity != null)
+		{
+			return new ResponseDto<UserDto> {
+				Results = new UserDto {
+					Email = updatedUserEntity.Email,
+					Id = updatedUserEntity.Id,
+					FullName = updatedUserEntity.FullName,
+					ActivationId = updatedUserEntity.ActivationId,
+					LastLogin = updatedUserEntity.LastLogin
+				}
+			};
+		}
 		return null;
+
+
 	}
 	public async Task<ResponseDto<UserDto>> GetUserPassword(UserDto userDto)
 	{

@@ -79,6 +79,7 @@ namespace VyasApi
 			services.AddTransient<IValidator<RegisterUserDto>, RegisterUserValidation>();
 			services.AddTransient<IValidator<ActivateUserDto>, ActivateUserValidation>();
 			services.AddTransient<IValidator<GenerateActivationCodeDto>, GenerateActivationCodeValidation>();
+			services.AddTransient<IValidator<AuthenticateUserDto>, AuthenticateUserValidation>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
