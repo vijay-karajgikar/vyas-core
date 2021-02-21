@@ -9,11 +9,17 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VyasApi.Data\VyasApi.Data.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+	<ProjectReference Include="..\VyasApi.Services\VyasApi.Services.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+	<ProjectReference Include="..\VyasApi.Repository\VyasApi.Repository.csproj" />
+	<ProjectReference Include="..\VyasApi.Validation\VyasApi.Validation.csproj" />
   </ItemGroup>
 </Project>

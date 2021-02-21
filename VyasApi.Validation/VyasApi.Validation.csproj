@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VyasApi.Data\VyasApi.Data.csproj" />
+    <ProjectReference Include="..\VyasApi.Services\VyasApi.Services.csproj" />
+  </ItemGroup>
+
+</Project>
